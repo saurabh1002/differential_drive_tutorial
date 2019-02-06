@@ -1,0 +1,20 @@
+<launch>
+  <!-- Launch Gazebo with an empty_world-->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <!-- <arg name="world_name" value="$(find differential_drive_tutorial)/world/<INSERT WORLD NAME HERE>.world"/> --> <!-- Use this command to load a custom defined world -->
+    <!-- more default parameters can be changed here -->
+    <arg name="paused" value="true"/> <!--  Starts the simulation in paused state -->
+    <arg name="verbose" value="false"/>
+    <arg name="physics" value="ode"/> <!-- specifies the physics engine used -->
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" value="false" /> <!-- make this true to see debug messages on the terminal -->
+  </include>
+
+<!-- Spawn a custom robot model in the world at specified 3D co-ordinates -->
+  <node name="AVITRA_spawner" pkg="gazebo_ros" type="spawn_model"
+    args="-x 0.0 -y 0.0 -z 0.03 -b -sdf -model Differential_drive_robot -file $(find differential_drive_tutorial)/SDF/model.sdf " respawn="true" output="screen">
+  </node>
+  <!-- Can load any custom script to control the robot -->
+  <node name="pub" pkg="publisher" type="publisher.py" output="screen"/> -->
+
+</launch>
